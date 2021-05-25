@@ -60,13 +60,16 @@ class CatController extends Controller
             $cat->tags()->attach($tag->id);
         }
 
-        foreach($request->file('images') as $uploadedFile) {
-            $image = new Image();
-            $image->path = $uploadedFile->store('images', 'public');
-            //dd(Storage::disk('public')->url($path));
-            $image->cat_id = $cat->id;
-            $image->save();
+        if ($request->file('images')) {
+            foreach($request->file('images') as $uploadedFile) {
+                $image = new Image();
+                $image->path = $uploadedFile->store('images', 'public');
+                //dd(Storage::disk('public')->url($path));
+                $image->cat_id = $cat->id;
+                $image->save();
+            }
         }
+
         return response()->redirectToRoute('cats.index');
     }
 
