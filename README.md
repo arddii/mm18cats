@@ -10,6 +10,8 @@
 
 `php artisan key:generate`
 
+`php artisan storage:link`
+
 `touch database.sqlite`
 
 change in .env
