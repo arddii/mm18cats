@@ -1,6 +1,11 @@
 <div class="card shadow-sm">
     <h5 class="card-header">
-        {{$cat->name}}
+        {{$cat->name}} <br/>
+        <small>
+            @foreach($cat->tags as $tag)
+                <span class="badge rounded-pill bg-{{ $tag->type }}">{{ $tag->tag }}</span>
+            @endforeach
+        </small>
     </h5>
 {{--    <img class="card-img-top" width="100%" height="200" src="{{$cat->images[0]->path ?? 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Missing-image-232x150.png'}}"/>--}}
     @if($cat->images->count() === 1)

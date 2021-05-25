@@ -6,6 +6,7 @@ use App\Http\Requests\CreateCatRequest;
 use App\Models\Breed;
 use App\Models\Cat;
 use App\Models\Image;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -51,7 +52,13 @@ class CatController extends Controller
             $breed->save();
         }
         $cat->breed_id = $breed->id;
+
         $cat->save();
+
+        foreach ($request->validated()['tags'] as $selected_tag) {
+            $tag = Tag::where('tag', $selected_tag)->firstOrFail();
+            $cat->tags()->attach($tag->id);
+        }
 
         foreach($request->file('images') as $uploadedFile) {
             $image = new Image();
