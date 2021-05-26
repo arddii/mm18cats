@@ -24,6 +24,7 @@ class TagFactory extends Factory
         $type = $this->faker->randomElement(['primary', 'secondary', 'success', 'danger', 'info', 'dark']);
 
         return [
+            'tag' => $this->faker->word(),
             'type' => $type,
         ];
     }
